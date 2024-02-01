@@ -1,7 +1,5 @@
 import NavBar from './components/NavBar'
-import CardsPeliculas from './components/CardsPeliculas'
-import { Container, Row } from 'react-bootstrap'
-import Peliculas from './data/Peliculas.json'
+import { Container } from 'react-bootstrap'
 import { Route, Routes } from 'react-router-dom'
 import CardsDetails from './components/CardsDetails'
 import CardsRow from './components/CardsRow'

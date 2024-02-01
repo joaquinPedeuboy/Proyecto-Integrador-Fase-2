@@ -24,6 +24,7 @@ export default function CardsRow() {
     };
 
     useEffect(() => {
+        // const searchUrl = search ? "/search/movie?query=" + search : '/';
         setPeliculas(getPeliculas());
     },[]);
 

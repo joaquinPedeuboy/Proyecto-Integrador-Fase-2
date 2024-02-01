@@ -20,3 +20,9 @@ export const getPeliculaById =(id)=>{
     const pelicula = peliculas.find((pelicula) => pelicula.id === id);
     return pelicula;
 }
+
+export const getFilm = (titulo) =>{
+    let peliculas = getPeliculas();
+    const pelicula = peliculas.filter((pelicula) => pelicula.titulo===titulo);
+    return pelicula;
+}

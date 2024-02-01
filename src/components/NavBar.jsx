@@ -3,15 +3,19 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import {Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import useCards from '../hooks/useCards';
-import { addFilm, getPeliculas } from '../service/localStorage';
+import { addFilm, getFilm, getPeliculas } from '../service/localStorage';
+import { FaSearch } from "react-icons/fa";
 
+// function useQuery(){
+//   return new URLSearchParams(useLocation().search);
+// }
 
 export default function NavBar() {
 
-  const {inputValues, buscarPeliculas }=useCards([{
+  const {inputValues, handleInputForm}=useCards([{
     urlImage:"../img/Los-Vengadores-EndGame.jpg",
     titulo:"Los Vengadores End Game",
     descripcion:"Los vengadores de marvel"
@@ -24,26 +28,28 @@ export default function NavBar() {
   {
       urlImage:"../img/StarWars-Episodio-V.jpg",
       titulo:"Star Wars Episodio V",
-      descripcion:"Los vengadores de marvel"
+      descripcion:"El Imperio Contrataca"
   },
   {
       urlImage:"../img/StarWars-Episodio-VI.jpg",
       titulo:"Star Wars Episodio VI",
-      descripcion:"Los vengadores de marvel"
+      descripcion:"El retorno del Jedi"
   },
   {
       urlImage:"../img/The-Godfather.jpg",
       titulo:"El Padrino",
-      descripcion:"Los vengadores de marvel"
+      descripcion:"El padriono Parte 1"
   },
   {
       urlImage:"../img/Tiburon.jpg",
       titulo:"Tiburon",
-      descripcion:"Los vengadores de marvel"
+      descripcion:"Shark"
   }]
 );
 
-const navigate = useNavigate();
+  // const query = useQuery();
+  // const search = query.get("search");
+
 
   useEffect(() => {
     // Verifica si ya hay películas en el almacenamiento local
@@ -57,10 +63,12 @@ const navigate = useNavigate();
     // Como segundo parámetro, pasa un array vacío para que el efecto se ejecute solo una vez
   }, []);
 
-  const handleSubmit = (e)=> {
-    e.preventDefault();
-    navigate(`/buscar-pelicula/${inputValues.titulo}`);
-  }
+
+    const handleSubmit = (e)=> {
+      e.preventDefault();
+      getFilm(inputValues);
+    }
+  
 
     return (
     <Navbar sticky="top" collapseOnSelect expand="lg" className="bg-body-tertiary border border-0 mb-5" data-bs-theme="dark">
@@ -74,17 +82,15 @@ const navigate = useNavigate();
           </Nav>
           <Form className="d-flex" onSubmit={handleSubmit}>
             <Form.Control
-              type="search"
+              type="text"
               placeholder="Pelicula"
               className="me-2"
-              aria-label="Search"
               value={inputValues.titulo}
-              onChange={buscarPeliculas}
-
+              onChange={handleInputForm}
             />
             <Button variant="outline-success"
                     type='submit'>
-                      Buscar
+                    <FaSearch size={20}/>
             </Button>{' '}
           </Form>
         </Navbar.Collapse>
