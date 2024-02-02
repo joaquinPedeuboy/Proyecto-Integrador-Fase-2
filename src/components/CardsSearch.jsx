@@ -6,17 +6,17 @@ import Col from 'react-bootstrap/Col';
 import { useEffect } from 'react';
 
 const SearchResultComponent = () => {
-    const { titulo } = useParams();
-    const navigate = useNavigate();
+    // const { titulo } = useParams();
+    // const navigate = useNavigate();
 
-    const {inputValues, setDataForm}=useCards();
+    // const {inputValues, setDataForm}=useCards();
 
-    useEffect(()=>{
-        if(titulo){
-            const pelicula = buscarPeliculas(titulo);
-            setDataForm(pelicula);
-        }
-    },[titulo])
+    // useEffect(()=>{
+    //     if(titulo){
+    //         const pelicula = buscarPeliculas(titulo);
+    //         setDataForm(pelicula);
+    //     }
+    // },[titulo])
 
     return (
     <div>

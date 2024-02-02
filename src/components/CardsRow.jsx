@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
-import useCards from '../hooks/useCards';
 import CardsPeliculas from './CardsPeliculas';
 import { getPeliculas } from '../service/localStorage';
 import React from "react";
@@ -24,7 +23,6 @@ export default function CardsRow() {
     };
 
     useEffect(() => {
-        // const searchUrl = search ? "/search/movie?query=" + search : '/';
         setPeliculas(getPeliculas());
     },[]);
 
