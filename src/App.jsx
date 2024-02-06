@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap'
 import { Route, Routes } from 'react-router-dom'
 import CardsDetails from './components/CardsDetails'
 import CardsRow from './components/CardsRow'
-import CardsSearch from './components/CardsSearch'
 
 function App() {
 
