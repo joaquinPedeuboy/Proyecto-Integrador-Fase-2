@@ -22,7 +22,8 @@ export const getPeliculaById =(id)=>{
 }
 
 export const getFilm = (titulo) =>{
-    let peliculas = getPeliculas();
-    const pelicula = peliculas.filter((pelicula) => pelicula.titulo===titulo);
-    return pelicula;
+    const filteredMovies = getPeliculas().filter(
+        (pelicula) => pelicula.titulo.toLowerCase().includes(titulo.toLowerCase())
+    );
+    return filteredMovies;
 }

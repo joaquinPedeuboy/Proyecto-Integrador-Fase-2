@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useCards(lasPeliculas=[]) {
+export default function useCards(lasPeliculas={}) {
     const [inputValues, setFields] = useState(lasPeliculas);
 
     const setDataForm=(newValues)=>{
@@ -11,7 +11,7 @@ export default function useCards(lasPeliculas=[]) {
         setFields({
             ...inputValues,
             [target.name]:target.value
-        })
+        });
     }
 
     return {

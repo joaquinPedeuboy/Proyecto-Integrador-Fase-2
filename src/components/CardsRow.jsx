@@ -4,6 +4,8 @@ import CardsPeliculas from './CardsPeliculas';
 import { getPeliculas } from '../service/localStorage';
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import CardsSearch from "./CardsSearch";
+import { getFilm } from '../service/localStorage';
 
 export default function CardsRow() {
     const [peliculas, setPeliculas]=useState([]);
@@ -22,19 +24,29 @@ export default function CardsRow() {
         }
     };
 
+    const handleSearch = (titulo) => {
+        try {
+            const filteredMovies = getFilm(titulo);
+            setPeliculas(filteredMovies);
+        } catch (error) {
+            console.error('Error al buscar películas', error);
+        }
+    };
+
     useEffect(() => {
         setPeliculas(getPeliculas());
     },[]);
 
     return (
         <>
+        <CardsSearch search={handleSearch} />
         <InfiniteScroll dataLength={peliculas.length}
                         next={loadMoreMovies}
                         hasMore={hasMore}
                         loader = {<h4> Cargando... </h4>}
                         style={{ overflowX: 'hidden' }}>
             <Row>
-                {peliculas.map(lasPeliculas=> <CardsPeliculas lasPeliculas={lasPeliculas} key={lasPeliculas.id}/>
+                {peliculas.map(lasPeliculas=> <CardsPeliculas lasPeliculas={lasPeliculas} key={lasPeliculas.id} setPeliculas={setPeliculas}/>
                 )}
             </Row>
         </InfiniteScroll>

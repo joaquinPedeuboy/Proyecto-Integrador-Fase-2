@@ -1,42 +1,34 @@
 import React from 'react';
 import useCards from '../hooks/useCards';
-import { useNavigate, useParams } from 'react-router-dom';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import { useEffect } from 'react';
+import { FaSearch } from "react-icons/fa";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
-const SearchResultComponent = () => {
-    // const { titulo } = useParams();
-    // const navigate = useNavigate();
+export default function CardsSearch ({search}){
+    const {inputValues,handleInputForm}=useCards();
 
-    // const {inputValues, setDataForm}=useCards();
-
-    // useEffect(()=>{
-    //     if(titulo){
-    //         const pelicula = buscarPeliculas(titulo);
-    //         setDataForm(pelicula);
-    //     }
-    // },[titulo])
+    const handleSubmit = (e)=> {
+        e.preventDefault();
+        search(inputValues.titulo);
+    }
 
     return (
-    <div>
-        <h2>Resultados de la búsqueda:</h2>
-                <Col xs={6} md={4} className='mb-3'>
-                    <Card>
-                        <Card.Img variant="top"
-                                    onClick={()=>navigate(`/view-pelicula/${id}`)}
-                                    src={inputValues.urlImage}
-                                    style={{cursor: 'pointer'}}/>
-                        <Card.Body>
-                            <Card.Title>{inputValues.titulo}</Card.Title>
-                            <Card.Text>
-                            {inputValues.descripcion}
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-    </div>
+        <div className='mb-3'>
+            <Form className="d-flex" onSubmit={handleSubmit}>
+                <Form.Control
+                type="text"
+                placeholder="Pelicula"
+                className="me-2"
+                name="titulo"
+                value={inputValues.titulo}
+                onChange={handleInputForm}
+                />
+                <Button variant="outline-success"
+                        type='submit'>
+                        <FaSearch size={20}/>
+                </Button>{' '}
+            </Form>
+        </div>
+        
     );
 };
-
-export default SearchResultComponent;
